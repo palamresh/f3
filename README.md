@@ -1,5 +1,17 @@
 # f3
+ final FirebaseNotificationServices services = FirebaseNotificationServices();
 
+  @override
+  void initState() {
+    super.initState();
+    services.requestNotificationPermission();
+    services.firebaseInit(context);
+    services.setupInteratMessage(context);
+    // services.isRefressToken();
+    services.getDeviceToken().then((value) {
+      debugPrint("Device Token");
+      debugPrint(value);
+    });
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
