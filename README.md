@@ -1,6 +1,23 @@
 # f3
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  FirebaseMessaging.onBackgroundMessage(onBackgroundMessageHandler);
+  await Firebase.initializeApp();
 
+  FirebaseNotificationServices services = FirebaseNotificationServices();
+  services.requestNotificationPermission();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  runApp(const MyApp());
+}
+
+@pragma('vm:entry-point')
+Future<void> onBackgroundMessageHandler(RemoteMessage message) async {
+  // print('hii hellow');
+  // print(message.notification!.title.toString());
+}
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_declarations, use_build_context_synchronously, no_duplicate_case_values, file_names
 
 import 'dart:io';
